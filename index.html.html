@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Hoja de Vida | Karen Esquivia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wine: #6B2D4E;
+    --wine-dark: #4A1F38;
+    --wine-light: #8B3D66;
+    --rose-gold: #C49A7A;
+    --rose-gold-light: #E8C9B3;
+    --blush: #F5EEE8;
+    --blush-dark: #EDE0D8;
+    --cream: #FAF6F2;
+    --text-dark: #2C1A24;
+    --text-mid: #5A3A4A;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--wine-dark) 0%, var(--wine) 50%, var(--wine-light) 100%);
+    padding: 48px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,154,122,0.2);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,154,122,0.15);
+    pointer-events: none;
+  }
+
+  .logo-circle {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--rose-gold);
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--rose-gold);
+    font-weight: 600;
+    background: rgba(255,255,255,0.06);
+    position: relative; z-index: 1;
+  }
+
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 6vw, 40px);
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: relative; z-index: 1;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--rose-gold-light);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 8vw, 54px);
+    color: var(--white);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose-gold-light);
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+    font-weight: 300;
+    position: relative; z-index: 1;
+  }
+
+  .score-badge {
+    display: inline-block;
+    background: rgba(196,154,122,0.2);
+    border: 1px solid var(--rose-gold);
+    border-radius: 40px;
+    padding: 10px 28px;
+    color: var(--rose-gold-light);
+    font-size: 13px;
+    letter-spacing: 1px;
+    position: relative; z-index: 1;
+  }
+
+  /* INTRO */
+  .intro-section {
+    padding: 40px 20px 20px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .intro-section p {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rose-gold), transparent);
+    margin: 24px auto;
+    max-width: 200px;
+  }
+
+  /* DIAGNOSTIC SECTIONS */
+  .diagnostic-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose-gold);
+    text-align: center;
+    margin: 40px 0 8px;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: var(--wine-dark);
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  /* CATEGORY CARD */
+  .category {
+    background: var(--white);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(107,45,78,0.06);
+    border: 1px solid var(--blush-dark);
+    transition: box-shadow 0.3s;
+  }
+
+  .category:hover { box-shadow: 0 6px 32px rgba(107,45,78,0.12); }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 22px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--blush);
+    border-bottom: 1px solid var(--blush-dark);
+    transition: background 0.2s;
+  }
+
+  .category-header:hover { background: var(--blush-dark); }
+
+  .cat-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--wine), var(--wine-light));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .cat-info { flex: 1; }
+
+  .cat-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--wine-dark);
+  }
+
+  .cat-sub {
+    font-size: 12px;
+    color: var(--text-mid);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+
+  .cat-toggle {
+    font-size: 20px;
+    color: var(--rose-gold);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .category.open .cat-toggle { transform: rotate(180deg); }
+
+  .category-body {
+    display: none;
+    padding: 22px;
+  }
+
+  .category.open .category-body { display: block; }
+
+  /* CHECKLIST ITEMS */
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--blush);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .check-item:last-child { border-bottom: none; }
+
+  .check-item input[type="checkbox"] { display: none; }
+
+  .check-box {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--blush-dark);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    background: var(--white);
+  }
+
+  .check-item.checked .check-box {
+    background: var(--wine);
+    border-color: var(--wine);
+  }
+
+  .check-item.checked .check-box::after {
+    content: '✓';
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .check-item.checked .check-text { opacity: 0.45; text-decoration: line-through; }
+
+  .check-content { flex: 1; }
+
+  .check-text {
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .check-tip {
+    font-size: 12px;
+    color: var(--text-mid);
+    margin-top: 4px;
+    line-height: 1.5;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-left: 8px;
+    font-weight: 500;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .tag-diy {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #A5D6A7;
+  }
+
+  .tag-pro {
+    background: #FDF3F7;
+    color: var(--wine);
+    border: 1px solid var(--rose-gold-light);
+  }
+
+  /* PROGRESS */
+  .progress-section {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid var(--blush-dark);
+    box-shadow: 0 2px 20px rgba(107,45,78,0.06);
+    position: sticky;
+    top: 12px;
+    z-index: 10;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .progress-text {
+    font-size: 13px;
+    color: var(--text-mid);
+    font-weight: 400;
+  }
+
+  .progress-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--wine);
+    font-weight: 600;
+  }
+
+  .progress-bar {
+    height: 8px;
+    background: var(--blush-dark);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--wine), var(--rose-gold));
+    border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  .progress-verdict {
+    font-size: 12px;
+    color: var(--text-mid);
+    margin-top: 8px;
+    min-height: 18px;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  /* RESULT PANEL */
+  .result-panel {
+    display: none;
+    background: linear-gradient(135deg, var(--wine-dark), var(--wine));
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-panel::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,154,122,0.25);
+  }
+
+  .result-panel.visible { display: block; }
+
+  .result-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 600;
+    color: var(--rose-gold-light);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .result-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+  }
+
+  .result-message {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 24px;
+    font-weight: 300;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .result-message strong { color: var(--rose-gold-light); font-weight: 500; }
+
+  /* CTA BLOCK */
+  .cta-block {
+    background: var(--white);
+    border: 2px solid var(--rose-gold-light);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .cta-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--rose-gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--wine-dark);
+    font-weight: 600;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .cta-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--wine), var(--wine-light));
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(107,45,78,0.3);
+  }
+
+  .btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(107,45,78,0.4);
+  }
+
+  .btn-whatsapp svg { width: 18px; height: 18px; fill: currentColor; }
+
+  .service-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .service-item {
+    background: var(--blush);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--text-dark);
+    line-height: 1.4;
+    border: 1px solid var(--blush-dark);
+  }
+
+  .service-item strong {
+    display: block;
+    color: var(--wine);
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 16px;
+    background: var(--blush);
+    border-radius: 12px;
+    margin-bottom: 28px;
+    font-size: 12px;
+    color: var(--text-mid);
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+
+  /* FOOTER */
+  .footer {
+    background: var(--wine-dark);
+    padding: 28px 20px;
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--rose-gold-light);
+    margin-bottom: 4px;
+  }
+
+  .footer-sub { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+
+  .footer-contact { font-size: 13px; }
+
+  .footer-contact a { color: var(--rose-gold-light); text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .service-items { grid-template-columns: 1fr; }
+    .progress-section { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="logo-circle">KE</div>
+  <div class="brand-name">Karen Esquivia</div>
+  <div class="brand-sub">Consultora en Empleabilidad</div>
+  <h1 class="hero-title">¿Tu hoja de vida<br>está <em>saboteándote</em>?</h1>
+  <p class="hero-desc">Descúbrelo en menos de 5 minutos con este diagnóstico diseñado por una experta en selección de talento.</p>
+  <span class="score-badge">✦ Diagnóstico Gratuito ✦</span>
+</div>
+
+<!-- INTRO -->
+<div class="intro-section">
+  <p>Reclutadores ven tu hoja de vida durante <strong>6 a 10 segundos</strong> antes de decidir si sigues o no en el proceso. Este diagnóstico te muestra exactamente dónde estás perdiendo oportunidades, qué puedes corregir hoy y qué requiere intervención profesional para tener impacto real.</p>
+  <div class="divider"></div>
+</div>
+
+<!-- MAIN DIAGNOSTIC -->
+<div class="diagnostic-wrapper">
+
+  <!-- PROGRESS -->
+  <div class="progress-section" id="progressSection">
+    <div class="progress-label">
+      <span class="progress-text">Tu diagnóstico</span>
+      <span class="progress-score" id="scoreDisplay">0/25</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-verdict" id="progressVerdict">Marca los puntos que ya tienes cubiertos en tu hoja de vida.</div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <span class="legend-item"><span class="tag tag-diy">DIY</span> Lo puedes hacer tú</span>
+    <span class="legend-item"><span class="tag tag-pro">PRO</span> Requiere optimización experta</span>
+  </div>
+
+  <!-- CATEGORY 1: ESTRUCTURA -->
+  <div class="category" id="cat1">
+    <div class="category-header" onclick="toggleCat('cat1')">
+      <div class="cat-icon">📄</div>
+      <div class="cat-info">
+        <div class="cat-name">Estructura y formato</div>
+        <div class="cat-sub">La base que todo reclutador evalúa primero</div>
+      </div>
+      <div class="cat-toggle">▾</div>
+    </div>
+    <div class="category-body">
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mi HV tiene máximo 2 páginas <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Más de 2 páginas sin 10+ años de experiencia estratégica es un error que te elimina. Corta sin piedad.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Uso una fuente profesional y consistente en todo el documento <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Calibri, Garamond o Georgia en 11-12pt. Mezclar fuentes, tamaños o colores chillones es señal de descuido.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Los márgenes y espaciados son uniformes en todo el documento <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Un documento visualmente caótico comunica desorganización antes de leer una sola línea.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mi HV tiene una jerarquía visual clara: el reclutador sabe dónde mirar primero <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">Esto va más allá de lo estético: implica diseño estratégico según tu nivel de experiencia y el cargo al que aplicas.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">El archivo está guardado en PDF y nombrado correctamente <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">El nombre debe ser: NombreApellido_HV.pdf — nunca "CV final 2" ni "hoja de vida nuevo".</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 2: PERFIL PROFESIONAL -->
+  <div class="category" id="cat2">
+    <div class="category-header" onclick="toggleCat('cat2')">
+      <div class="cat-icon">✍️</div>
+      <div class="cat-info">
+        <div class="cat-name">Perfil profesional</div>
+        <div class="cat-sub">Tu vendedor de 4 líneas — el más ignorado</div>
+      </div>
+      <div class="cat-toggle">▾</div>
+    </div>
+    <div class="category-body">
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Tengo un perfil profesional al inicio (no un objetivo personal) <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">"Deseo obtener un cargo donde pueda crecer..." → Esto ya no funciona. El perfil debe hablar de lo que tú APORTAS, no de lo que quieres.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mi perfil menciona años de experiencia, especialización y valor diferencial concreto <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">Un perfil potente no se improvisa: requiere saber qué palabras clave busca el mercado y cómo posicionarte estratégicamente.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mi perfil es específico (no aplica para cualquier cargo) <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">Un perfil genérico es invisible. Si aplicas a cargos distintos, necesitas versiones estratégicamente adaptadas de tu HV.</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 3: EXPERIENCIA -->
+  <div class="category" id="cat3">
+    <div class="category-header" onclick="toggleCat('cat3')">
+      <div class="cat-icon">💼</div>
+      <div class="cat-info">
+        <div class="cat-name">Experiencia laboral</div>
+        <div class="cat-sub">Donde se gana o se pierde la entrevista</div>
+      </div>
+      <div class="cat-toggle">▾</div>
+    </div>
+    <div class="category-body">
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Incluyo fechas exactas (mes/año) en todos mis cargos <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Poner solo el año genera sospecha y el reclutador asume lo peor. Si hubo un gap, hay formas de manejarlo bien.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mis funciones están redactadas como logros, no como lista de tareas <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">"Manejo de clientes" vs. "Incrementé cartera en un 30% en 6 meses mediante estrategia de retención". La diferencia es abismal.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Incluyo al menos un dato cuantificable por cargo (%, $, #, tiempo) <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">Los números dan credibilidad. Si no los tienes claros, una experta te ayuda a reconstruirlos de manera honesta y estratégica.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Adapté mi experiencia al cargo al que estoy aplicando <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">Enviar la misma HV a todos los cargos es el error más costoso. La personalización estratégica multiplica tus respuestas.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">No tengo brechas laborales sin explicar <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Períodos sin trabajo se pueden gestionar. Ignóralos y el reclutador saca sus propias conclusiones.</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 4: PALABRAS CLAVE ATS -->
+  <div class="category" id="cat4">
+    <div class="category-header" onclick="toggleCat('cat4')">
+      <div class="cat-icon">🤖</div>
+      <div class="cat-info">
+        <div class="cat-name">Optimización ATS</div>
+        <div class="cat-sub">El filtro invisible que elimina tu HV antes de llegar a humanos</div>
+      </div>
+      <div class="cat-toggle">▾</div>
+    </div>
+    <div class="category-body">
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mi HV no tiene tablas, columnas ni íconos decorativos <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Los sistemas ATS no leen diseños complejos. Una HV bonita pero ilegible para el software = invisible para el reclutador.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Incluyo palabras clave del sector y cargo específico <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">Saber cuáles son esas palabras clave requiere análisis de ofertas y conocimiento del mercado. No es intuición, es estrategia.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Los títulos de mis cargos coinciden con los que usa el mercado <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">"Coordinador de Felicidad Empresarial" puede ser tu título real pero el ATS busca "Gerente de Bienestar Organizacional".</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 5: FORMACIÓN -->
+  <div class="category" id="cat5">
+    <div class="category-header" onclick="toggleCat('cat5')">
+      <div class="cat-icon">🎓</div>
+      <div class="cat-info">
+        <div class="cat-name">Formación y habilidades</div>
+        <div class="cat-sub">Lo que refuerza tu candidatura (o la debilita)</div>
+      </div>
+      <div class="cat-toggle">▾</div>
+    </div>
+    <div class="category-body">
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Solo incluyo cursos y certificaciones relevantes para el cargo <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Listar 20 cursos de todo tipo no impresiona: distrae y hace ver que no sabes lo que buscas.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mis habilidades son específicas, no clichés ("trabajo en equipo", "proactivo") <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Estas palabras no dicen nada. Reemplázalas con competencias demostrables: "análisis de datos con Power BI", "gestión de proyectos bajo metodología Scrum".</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mi nivel de inglés (u otro idioma) está correctamente indicado <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">Evita "nivel intermedio" sin especificar. Usa la escala A1-C2 o indica si es conversacional, técnico, escrito.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">La jerarquía de mi sección de formación está estratégicamente ordenada <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">¿Va primero la experiencia o la formación? Depende de tu perfil. Cada caso requiere una lectura estratégica diferente.</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- CATEGORY 6: DATOS DE CONTACTO -->
+  <div class="category" id="cat6">
+    <div class="category-header" onclick="toggleCat('cat6')">
+      <div class="cat-icon">📱</div>
+      <div class="cat-info">
+        <div class="cat-name">Datos de contacto y presencia digital</div>
+        <div class="cat-sub">Que te encuentren (bien) cuando quieren contactarte</div>
+      </div>
+      <div class="cat-toggle">▾</div>
+    </div>
+    <div class="category-body">
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mi correo es profesional (no contiene apodos, años de nacimiento ni números) <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">princesa_karen92@hotmail.com no es apropiado. Crea uno con tu nombre completo en Gmail.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Tengo LinkedIn actualizado y el enlace está en mi HV <span class="tag tag-diy">DIY</span></div>
+          <div class="check-tip">El 87% de los reclutadores revisan LinkedIn antes de la entrevista. Si no tienes o está desactualizado, es una señal negativa.</div>
+        </div>
+      </label>
+
+      <label class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox">
+        <div class="check-box"></div>
+        <div class="check-content">
+          <div class="check-text">Mi perfil de LinkedIn está optimizado y es coherente con mi HV <span class="tag tag-pro">PRO</span></div>
+          <div class="check-tip">LinkedIn y HV inconsistentes generan desconfianza inmediata. La optimización de ambos como sistema es parte de la estrategia de empleabilidad.</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <!-- RESULT PANEL (aparece cuando tiene 20+) -->
+  <div class="result-panel" id="resultPanel">
+    <div class="result-score" id="resultScore">0%</div>
+    <div class="result-label">de tu diagnóstico completado</div>
+    <div class="result-message" id="resultMessage"></div>
+  </div>
+
+  <!-- CTA BLOCK -->
+  <div class="cta-block" id="ctaBlock">
+    <div class="cta-eyebrow">✦ Siguiente paso ✦</div>
+    <div class="cta-title" id="ctaTitle">¿Lista para tener una hoja de vida que abra puertas?</div>
+    <div class="cta-desc" id="ctaDesc">Agenda una consulta con Karen y convierte tu HV en tu mejor carta de presentación.</div>
+
+    <div class="service-items">
+      <div class="service-item">
+        <strong>✦ Optimización completa</strong>
+        Redacción estratégica + ATS + perfil LinkedIn alineado
+      </div>
+      <div class="service-item">
+        <strong>✦ Revisión exprés</strong>
+        Diagnóstico profesional con correcciones prioritarias
+      </div>
+      <div class="service-item">
+        <strong>✦ HV por competencias</strong>
+        Para procesos de selección exigentes o altos cargos
+      </div>
+      <div class="service-item">
+        <strong>✦ Versiones múltiples</strong>
+        HV adaptada para diferentes perfiles y sectores
+      </div>
+    </div>
+
+    <a class="btn-whatsapp" href="https://wa.me/573150649722?text=Hola%20Karen%2C%20hice%20el%20diagn%C3%B3stico%20de%20mi%20hoja%20de%20vida%20y%20quiero%20optimizarla" target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Quiero optimizar mi hoja de vida
+    </a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Karen Esquivia</div>
+  <div class="footer-sub">Consultora en Empleabilidad</div>
+  <div class="footer-contact">
+    WhatsApp: <a href="https://wa.me/573150649722">315 064 9722</a> &nbsp;·&nbsp;
+    <a href="https://instagram.com/consultora_karenesquivia" target="_blank">@consultora_karenesquivia</a>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 25;
+  let checked = 0;
+
+  function toggleCat(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('open');
+  }
+
+  // Open first category by default
+  document.getElementById('cat1').classList.add('open');
+
+  function toggleCheck(label) {
+    label.classList.toggle('checked');
+    checked = document.querySelectorAll('.check-item.checked').length;
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const pct = Math.round((checked / TOTAL) * 100);
+    document.getElementById('scoreDisplay').textContent = checked + '/' + TOTAL;
+    document.getElementById('progressFill').style.width = pct + '%';
+
+    let verdict = '';
+    if (checked === 0) verdict = 'Marca los puntos que ya tienes cubiertos en tu hoja de vida.';
+    else if (pct < 30) verdict = 'Tu hoja de vida necesita trabajo importante. Sigue revisando cada sección.';
+    else if (pct < 55) verdict = 'Tienes algunos puntos cubiertos, pero hay brechas que te están costando entrevistas.';
+    else if (pct < 75) verdict = 'Vas bien, pero los puntos que faltan son los de mayor impacto en selección.';
+    else if (pct < 90) verdict = 'Muy bien. Los detalles faltantes pueden ser decisivos en procesos competitivos.';
+    else verdict = '¡Excelente! Tu hoja de vida está bien trabajada.';
+
+    document.getElementById('progressVerdict').textContent = verdict;
+
+    // Result panel
+    const panel = document.getElementById('resultPanel');
+    const score = document.getElementById('resultScore');
+    const msg = document.getElementById('resultMessage');
+
+    if (checked >= 5) {
+      panel.classList.add('visible');
+      score.textContent = pct + '%';
+
+      if (pct < 40) {
+        msg.innerHTML = 'Tu hoja de vida tiene <strong>problemas críticos</strong> que probablemente te están eliminando antes de llegar a la entrevista. No es solo editar texto: necesitas reconstruirla estratégicamente.';
+        document.getElementById('ctaTitle').textContent = 'Tu HV necesita intervención profesional';
+        document.getElementById('ctaDesc').textContent = 'No te arriesgues a seguir aplicando con una HV que no está trabajando para ti. Agenda con Karen hoy.';
+      } else if (pct < 70) {
+        msg.innerHTML = 'Tienes una base, pero los puntos que te faltan — especialmente los marcados como <strong>PRO</strong> — son los que generan la diferencia entre candidatos que obtienen entrevistas y los que no.';
+        document.getElementById('ctaTitle').textContent = 'Estás cerca — pero los detalles importan';
+        document.getElementById('ctaDesc').textContent = 'Una sesión de optimización enfocada puede transformar tu HV en 48 horas.';
+      } else {
+        msg.innerHTML = 'Tienes conciencia de los elementos clave. Ahora la pregunta es: ¿están bien ejecutados? Una <strong>revisión profesional</strong> garantiza que tu HV no solo esté completa, sino que sea competitiva.';
+        document.getElementById('ctaTitle').textContent = 'Una HV completa no es lo mismo que una HV poderosa';
+        document.getElementById('ctaDesc').textContent = 'Karen puede llevar tu HV del nivel correcto al nivel competitivo que abre las puertas correctas.';
+      }
+    } else {
+      panel.classList.remove('visible');
+    }
+  }
+</script>
+</body>
+</html>
